@@ -1,3 +1,5 @@
+# https://blog.sandro-pereira.com/2022/03/02/apim-and-service-bus-connecting-your-service-bus-to-azure-apim-and-relaying-messages/
+
 # Get URI from queue "Overview" section. Eg - https://ApimSBFuncApp.servicebus.windows.net/apimqueue 
 $URI="https://{{service-bus-name-here}}.servicebus.windows.net/{{queue-name-here}}"
 # Access_Policy_Name can be "RootManageSharedAccessKey"
