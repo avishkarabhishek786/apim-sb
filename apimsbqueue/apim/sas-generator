@@ -12,3 +12,24 @@ $Signature = $HMAC.ComputeHash([Text.Encoding]::ASCII.GetBytes($SignatureString)
 $Signature = [Convert]::ToBase64String($Signature)
 $SASToken = "SharedAccessSignature sr=" + [System.Web.HttpUtility]::UrlEncode($URI) + "&sig=" + [System.Web.HttpUtility]::UrlEncode($Signature) + "&se=" + $Expires + "&skn=" + $Access_Policy_Name
 $SASToken
+
+
+
+
+
+
+
+# Get URI from queue "Overview" section. Eg - https://ApimSBFuncApp.servicebus.windows.net/apimqueue 
+$URI="https://ApimSBFuncApp.servicebus.windows.net/testtopic"
+# Access_Policy_Name can be "RootManageSharedAccessKey"
+$Access_Policy_Name="RootManageSharedAccessKey"
+# Access_Policy_Key is the Primary key in the Shared Access Policy of the Servicebus Namespace
+$Access_Policy_Key="OIB26T0pzBPvDa8fmv9Xm1LFm0sl4Vt00+ASbMi8w2A="
+$Expires=([DateTimeOffset]::Now.ToUnixTimeSeconds())+31587840
+$SignatureString=[System.Web.HttpUtility]::UrlEncode($URI)+ "`n" + [string]$Expires
+$HMAC = New-Object System.Security.Cryptography.HMACSHA256
+$HMAC.key = [Text.Encoding]::ASCII.GetBytes($Access_Policy_Key)
+$Signature = $HMAC.ComputeHash([Text.Encoding]::ASCII.GetBytes($SignatureString))
+$Signature = [Convert]::ToBase64String($Signature)
+$SASToken = "SharedAccessSignature sr=" + [System.Web.HttpUtility]::UrlEncode($URI) + "&sig=" + [System.Web.HttpUtility]::UrlEncode($Signature) + "&se=" + $Expires + "&skn=" + $Access_Policy_Name
+$SASToken
